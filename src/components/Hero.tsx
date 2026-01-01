@@ -1,7 +1,7 @@
 import { useState } from "react";
 import herobg from "../assets/herobg.jpg";
 import { FiSend, FiChevronRight } from "react-icons/fi";
-import { FaWhatsapp, FaStar, FaCheckCircle, FaLeaf, FaPhoneAlt } from "react-icons/fa";
+import { FaWhatsapp, FaStar, FaCheckCircle, FaLeaf } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const Hero = () => {
@@ -52,14 +52,6 @@ const Hero = () => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-
-  // Features list with icons - Commented out since it's not used
-  // const features = [
-  //   { icon: <FaStar />, text: "5-Star Rated Service" },
-  //   { icon: <FaCheckCircle />, text: "Free Consultation" },
-  //   { icon: <FaLeaf />, text: "Eco-Friendly" },
-  //   { icon: <FaPhoneAlt />, text: "24/7 Support" }
-  // ];
 
   return (
     <div className="w-full min-h-screen relative rounded-3xl overflow-hidden font-[Poppins]">
