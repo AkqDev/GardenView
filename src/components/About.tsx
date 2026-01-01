@@ -1,6 +1,6 @@
 import about from "../assets/about.jpg";
 import { motion } from "framer-motion";
-import { FaLeaf, FaHandsHelping, FaTools, FaAward, FaClock, FaSeedling, FaHome } from "react-icons/fa";
+import { FaLeaf, FaHandsHelping, FaTools, FaAward, FaClock, FaSeedling } from "react-icons/fa";
 
 const About = () => {
   const features = [
@@ -185,34 +185,6 @@ const About = () => {
                       {feature.description}
                     </p>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 pt-6 border-t border-gray-200"
-          >
-            {[
-              { number: "500+", label: "Projects Completed" },
-              { number: "98%", label: "Client Satisfaction" },
-              { number: "10+", label: "Years Experience" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-gradient-to-br from-emerald-50 to-white rounded-2xl"
-              >
-                <div className="font-bold text-3xl md:text-4xl text-[#008151]">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 text-sm md:text-base mt-2">
-                  {stat.label}
                 </div>
               </motion.div>
             ))}
