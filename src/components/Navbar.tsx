@@ -80,7 +80,7 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full py-5 bg-gradient-to-r from-white to-emerald-50/30 shadow-sm"
+      className="w-full py-5"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,10 +106,8 @@ const Navbar = () => {
                 >
                   <FaLeaf className="w-10 h-10 text-[#008151] mr-3" />
                 </motion.div>
-                <h1 className="text-3xl font-bold text-[#008151] tracking-wide">
-                  <span className="bg-gradient-to-r from-[#008151] to-emerald-600 bg-clip-text text-transparent">
+                <h1 className="text-3xl text-black/800 group-hover:text-[#008151] transition-colors duration-300">
                     Garden View
-                  </span>
                 </h1>
               </div>
             </motion.div>
@@ -117,7 +115,7 @@ const Navbar = () => {
             {/* Desktop Navigation Items */}
             <motion.div 
               variants={containerVariants}
-              className="hidden md:flex items-center space-x-1"
+              className="hidden md:flex items-center space-x-2"
             >
               {navItems.map((item, index) => (
                 <motion.a
@@ -130,7 +128,7 @@ const Navbar = () => {
                     backgroundColor: "rgba(0, 129, 81, 0.1)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative text-md font-semibold flex items-center px-4 py-2 rounded-full text-sm text-[#008151] transition-all duration-300"
+                  className="relative text-md font-semibold flex items-center px-4 py-2 rounded-full text-lg text-[#008151] transition-all duration-300"
                 >
                   {item.name}
                   <motion.span
@@ -157,8 +155,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               className="relative bg-gradient-to-r from-[#008151] to-emerald-600 text-white px-6 py-3.5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
             >
-              <span className="relative z-10 flex items-center">
-                <FaWhatsapp className="mr-2" />
+              <span className="relative z-10 flex items-center text-xl">
                 Get in Touch
               </span>
               <motion.div
