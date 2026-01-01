@@ -42,24 +42,24 @@ const Hero = () => {
     }, 1000);
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSendClick();
     }
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
-  // Features list with icons
-  const features = [
-    { icon: <FaStar />, text: "5-Star Rated Service" },
-    { icon: <FaCheckCircle />, text: "Free Consultation" },
-    { icon: <FaLeaf />, text: "Eco-Friendly" },
-    { icon: <FaPhoneAlt />, text: "24/7 Support" }
-  ];
+  // Features list with icons - Commented out since it's not used
+  // const features = [
+  //   { icon: <FaStar />, text: "5-Star Rated Service" },
+  //   { icon: <FaCheckCircle />, text: "Free Consultation" },
+  //   { icon: <FaLeaf />, text: "Eco-Friendly" },
+  //   { icon: <FaPhoneAlt />, text: "24/7 Support" }
+  // ];
 
   return (
     <div className="w-full min-h-screen relative rounded-3xl overflow-hidden font-[Poppins]">

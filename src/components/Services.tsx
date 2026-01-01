@@ -47,7 +47,6 @@ const Services = () => {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = Math.ceil(servicesData.length / 3);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check for mobile screen
@@ -62,6 +61,9 @@ const Services = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Calculate total slides based on screen size
+  const totalSlides = isMobile ? servicesData.length : Math.ceil(servicesData.length / 3);
+
   // Auto slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,19 +73,24 @@ const Services = () => {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
-  // Get current services to display (3 on desktop, 1 on mobile)
+  // Get current services to display
   const getCurrentServices = () => {
-    const itemsPerView = isMobile ? 1 : 3;
-    const startIndex = currentSlide * itemsPerView;
-    return servicesData.slice(startIndex, startIndex + itemsPerView);
+    if (isMobile) {
+      // On mobile: show 1 service per slide
+      return [servicesData[currentSlide]];
+    } else {
+      // On desktop: show 3 services per slide
+      const startIndex = currentSlide * 3;
+      return servicesData.slice(startIndex, startIndex + 3);
+    }
   };
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
   return (
-    <div className="w-full bg-gradient-to-b from-[#11332B] to-[#0a231d] py-12 md:py-16 px-4 md:px-8 rounded-3xl">
+    <div className="w-full bg-gradient-to-b from-[#11332B] to-[#0a231d] py-12 md:py-16 px-4 md:px-8 rounded-3xl" id="services">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 px-2">
@@ -108,7 +115,7 @@ const Services = () => {
                   <img 
                     src={service.img} 
                     alt={service.title} 
-                    className="w-300 h-auto  object-cover transition-transform duration-700 hover:scale-110" 
+                    className="w-300 h-auto object-cover transition-transform duration-700 hover:scale-110" 
                   />
                 </div>
                 
@@ -123,13 +130,12 @@ const Services = () => {
                   <p className="text-gray-300 text-sm md:text-base leading-relaxed font-[poppins] mb-4">
                     {service.description}
                   </p>
-                  
-        </div>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Slider Dots - Adjusted for mobile/desktop */}
+          {/* Slider Dots - Show 6 dots on mobile, 2 dots on desktop */}
           <div className="flex justify-center items-center gap-3 mb-8">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
@@ -144,7 +150,6 @@ const Services = () => {
               />
             ))}
           </div>
-
         </div>
         
         {/* Additional Information */}
