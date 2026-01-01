@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaLeaf, FaBars, FaTimes, FaWhatsapp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,8 +18,8 @@ const Navbar = () => {
   const whatsappMessage = "Hello! I'm interested in your gardening services.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper typing
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -29,25 +30,25 @@ const Navbar = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: -20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100
       }
     }
   };
 
-  const mobileMenuVariants = {
+  const mobileMenuVariants: Variants = {
     closed: {
       height: 0,
       opacity: 0,
       transition: {
         duration: 0.3,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     },
     open: {
@@ -55,20 +56,20 @@ const Navbar = () => {
       opacity: 1,
       transition: {
         duration: 0.4,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
         staggerChildren: 0.1,
         delayChildren: 0.1
       }
     }
   };
 
-  const mobileItemVariants = {
+  const mobileItemVariants: Variants = {
     closed: { x: -20, opacity: 0 },
     open: {
       x: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 200,
         damping: 20
       }
@@ -79,7 +80,7 @@ const Navbar = () => {
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" as const }}
       className="w-full py-5"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
@@ -117,7 +118,7 @@ const Navbar = () => {
               variants={containerVariants}
               className="hidden md:flex items-center space-x-2"
             >
-              {navItems.map((item, index) => (
+              {navItems.map((item) => (
                 <motion.a
                   key={item.name}
                   variants={itemVariants}
