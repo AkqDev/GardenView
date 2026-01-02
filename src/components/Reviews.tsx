@@ -88,9 +88,9 @@ const Reviews = () => {
 
   // Horizontal scroll animation
   const scrollAnimation = {
-    x: [0, -2800], // Adjusted for all cards
+    x: [0, -2400], // Adjusted for smaller cards
     transition: {
-      duration: 40,
+      duration: 35,
       repeat: Infinity,
       ease: "linear" as const,
     }
@@ -101,7 +101,7 @@ const Reviews = () => {
     initial: { scale: 1, y: 0 },
     hover: {
       scale: 1.05,
-      y: -8,
+      y: -5,
       boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
       transition: {
         type: "spring" as const,
@@ -111,20 +111,8 @@ const Reviews = () => {
     }
   };
 
-  // Floating animation for featured badge
-  const badgeVariants = {
-    float: {
-      y: [0, -10, 0],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut" as const,
-      }
-    }
-  };
-
   return (
-    <div className="w-full py-24 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
+    <div className="w-full py-20 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
       {/* Dotted Glow Background - Simple CSS version */}
       <DottedGlowBackground
         className="absolute inset-0"
@@ -144,11 +132,11 @@ const Reviews = () => {
             y: [0, -30, 0],
             x: [0, 20, 0],
             scale: [1, 1.1, 1],
-            transition: {
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut" as const,
-            }
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
         <motion.div 
@@ -157,94 +145,64 @@ const Reviews = () => {
             y: [0, 30, 0],
             x: [0, -20, 0],
             scale: [1, 1.1, 1],
-            transition: {
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut" as const,
-              delay: 1
-            }
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
           }}
         />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header Section - More engaging */}
+        {/* Header Section */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ 
-              duration: 0.8, 
-              type: "spring" as const,
-              stiffness: 200,
-              damping: 15 
-            }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-green-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-full shadow-2xl">
-                <FaQuoteLeft className="text-white text-3xl" />
-              </div>
-              <motion.div
-                variants={badgeVariants}
-                animate="float"
-                className="absolute -top-2 -right-3 bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg"
-              >
-                TRUSTED
-              </motion.div>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold font-[poppins] mb-4 leading-tight">
-              Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Homeowners</span> & <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-green-400">Professionals</span>
-            </h1>
-          </motion.div>
-       </motion.div>
-
-        {/* Main Carousel Section */}
-        <div className="relative">
-          {/* Section Title with gradient */}
           <motion.div 
-            className="text-center mb-10"
+            className="mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-900/30 to-emerald-900/30 px-6 py-3 rounded-full border border-green-500/20 backdrop-blur-sm">
-              <FaStar className="text-yellow-400 text-lg animate-spin-slow" />
-              <h2 className="text-white text-2xl md:text-3xl font-bold font-[poppins]">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-900/30 to-emerald-900/30 px-5 py-2 rounded-full border border-green-500/20 backdrop-blur-sm mb-4">
+              <h2 className="text-white text-xl md:text-2xl font-bold font-[poppins]">
                 Client Testimonials
               </h2>
-              <FaStar className="text-yellow-400 text-lg animate-spin-slow" style={{ animationDirection: 'reverse' }} />
             </div>
-            <p className="text-gray-300 mt-4 text-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h1 className="text-white text-3xl md:text-4xl font-bold font-[poppins] mb-3 leading-tight">
+                Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Homeowners</span> & <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-green-400">Professionals</span>
+              </h1>
+            </motion.div>
+            <p className="text-gray-300 text-base md:text-lg font-[poppins]">
               See what our clients are saying about their experience
             </p>
           </motion.div>
+        </motion.div>
 
-          {/* Carousel Container */}
-          <div className="relative">
-            {/* Gradient overlays for fade effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#11322A] via-[#11322A]/95 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#11322A] via-[#11322A]/95 to-transparent z-10 pointer-events-none"></div>
+        {/* Carousel Container - Improved */}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Subtle side glow effect when scrolling */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-24 h-3/4 bg-gradient-to-r from-green-500/20 to-transparent blur-xl opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300 pointer-events-none z-20"></div>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-24 h-3/4 bg-gradient-to-l from-emerald-500/20 to-transparent blur-xl opacity-0 group-hover/slider:opacity-100 transition-opacity duration-300 pointer-events-none z-20"></div>
+
+          {/* Main Carousel Container with subtle glow */}
+          <div className="relative rounded-2xl p-1 bg-gradient-to-r from-green-500/5 via-emerald-500/5 to-green-500/5">
+            {/* Inner glow border */}
+            <div className="absolute inset-0 rounded-2xl border border-green-400/10 pointer-events-none"></div>
             
-            {/* Glow effect behind carousel */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-emerald-500/10 blur-3xl -z-10"></div>
-
             {/* Main Carousel */}
             <motion.div
-              className="flex py-8 cursor-grab active:cursor-grabbing"
+              className="flex py-6 cursor-grab active:cursor-grabbing group/slider"
               animate={scrollAnimation}
               whileHover={{ animationPlayState: "paused" }}
             >
@@ -254,87 +212,95 @@ const Reviews = () => {
                   whileHover="hover"
                   initial="initial"
                   variants={cardVariants}
-                  className="flex-shrink-0 w-[300px] md:w-[340px] mx-3 md:mx-4 relative group"
+                  className="flex-shrink-0 w-[280px] mx-3 relative group" // Smaller width
                 >
-                  
                   {/* Card */}
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 md:p-7 border border-white/20 shadow-2xl hover:shadow-green-900/40 transition-all duration-300 h-full relative overflow-hidden">
-                    {/* Background glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 group-hover:opacity-30 transition-opacity duration-300"></div>
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-5 border border-white/20 shadow-xl hover:shadow-green-900/30 transition-all duration-300 h-full relative overflow-hidden">
+                    {/* Background gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/3 via-transparent to-emerald-500/3 group-hover:from-green-500/8 group-hover:to-emerald-500/8 transition-all duration-300"></div>
                     
-                    {/* Quote icon background */}
-                    <div className="absolute top-4 right-4 text-green-400/10 text-6xl md:text-7xl">
+                    {/* Quote icon */}
+                    <div className="absolute top-3 right-3 text-green-400/10 text-5xl">
                       <FaQuoteLeft />
                     </div>
 
                     {/* Rating Stars */}
-                    <div className="flex items-center mb-4 md:mb-5 relative z-10">
+                    <div className="flex items-center mb-3 relative z-10">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
-                          <motion.div
+                          <FaStar 
                             key={i}
-                            whileHover={{ scale: 1.2, rotate: 15 }}
-                            transition={{ type: "spring" as const, stiffness: 400 }}
-                          >
-                            <FaStar className="text-yellow-400 w-5 h-5 md:w-6 md:h-6 mr-1 drop-shadow-lg" />
-                          </motion.div>
+                            className="text-yellow-400 w-4 h-4 md:w-5 md:h-5 mr-1 drop-shadow-lg" 
+                          />
                         ))}
                       </div>
-                      <span className="ml-3 text-green-300 font-bold text-base md:text-lg bg-green-900/30 px-3 py-1 rounded-full">
-                        5.0 Rating
+                      <span className="ml-2 text-green-300 font-semibold text-sm bg-green-900/20 px-2 py-1 rounded-full">
+                        5.0
                       </span>
                     </div>
 
                     {/* Review Text */}
-                    <p className="text-gray-100 text-base md:text-lg italic mb-6 md:mb-7 leading-relaxed relative z-10 min-h-[120px]">
+                    <p className="text-gray-100 text-sm md:text-base italic mb-4 leading-relaxed relative z-10 min-h-[80px] line-clamp-3">
                       "{review.text}"
                     </p>
 
                     {/* Client Info */}
-                    <div className="flex items-center relative z-10">
+                    <div className="flex items-center relative z-10 pt-3 border-t border-white/10">
                       <motion.div
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6, type: "spring" as const }}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
                         className="relative"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-sm opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
                         <img 
                           src={review.image} 
                           alt={review.name} 
-                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-green-400 relative shadow-lg"
+                          className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-green-400 relative shadow-md"
                         />
                       </motion.div>
-                      <div className="ml-4">
-                        <h3 className="text-white text-lg md:text-xl font-bold font-[poppins]">
+                      <div className="ml-3">
+                        <h3 className="text-white text-sm md:text-base font-bold font-[poppins] leading-tight">
                           {review.name}
                         </h3>
-                        <div className="flex items-center gap-2">
-                          <p className="text-green-300 text-sm md:text-base font-medium bg-green-900/30 px-3 py-1 rounded-full">
+                        <div className="flex items-center gap-1 mt-1">
+                          <p className="text-green-300 text-xs md:text-sm font-medium bg-green-900/20 px-2 py-0.5 rounded-full">
                             {review.role}
                           </p>
                           <motion.div
-                            whileHover={{ x: 5 }}
+                            whileHover={{ x: 3 }}
                             className="text-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                           >
-                            <FaArrowRight />
+                            <FaArrowRight className="w-3 h-3" />
                           </motion.div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Decorative corner elements */}
-                    <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-green-400/30 rounded-tl-3xl"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-green-400/30 rounded-br-3xl"></div>
+                    {/* Subtle corner accents */}
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-green-400/20 rounded-tl-2xl"></div>
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-green-400/20 rounded-br-2xl"></div>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </div>
+
+        {/* CTA or indicator */}
+        <motion.div 
+          className="text-center mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <p className="text-gray-400 text-sm font-[poppins]">
+            <span className="text-green-400">Hover</span> to pause • <span className="text-emerald-400">Drag</span> to explore more reviews
+          </p>
+        </motion.div>
       </div>
 
       {/* Bottom gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#11322A] to-transparent pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#11322A] to-transparent pointer-events-none"></div>
     </div>
   );
 };

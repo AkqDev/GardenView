@@ -77,24 +77,24 @@ const Portfolio = () => {
 
   return (
     <div className="w-full h-auto mx-auto my-20 relative overflow-hidden">
-      <div className="text-center mb-10">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl text-[#008151] font-bold font-[poppins]"
-        >
-          Portfolio
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xl max-w-xl font-semibold font-[poppins] mt-3 mx-auto"
-        >
-          Our past projects of landscaping work
-        </motion.p>
-      </div>
+        <div className="text-center mb-10">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl text-[#008151] font-bold font-[poppins]"
+          >
+            Portfolio
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl max-w-xl font-semibold font-[poppins] mt-3 mx-auto"
+          >
+            Our past projects of landscaping work
+          </motion.p>
+        </div>
 
       <motion.div 
         variants={containerVariants}
