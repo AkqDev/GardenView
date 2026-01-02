@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaArrowRight } from 'react-icons/fa';
 import portfolio1 from '../assets/portfolio1.jpg';
