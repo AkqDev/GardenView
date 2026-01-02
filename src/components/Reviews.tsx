@@ -194,7 +194,7 @@ const Reviews = () => {
               <motion.div
                 variants={badgeVariants}
                 animate="float"
-                className="absolute -top-2 -right-2 bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                className="absolute -top-2 -right-3 bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg"
               >
                 TRUSTED
               </motion.div>
@@ -256,20 +256,7 @@ const Reviews = () => {
                   variants={cardVariants}
                   className="flex-shrink-0 w-[300px] md:w-[340px] mx-3 md:mx-4 relative group"
                 >
-                  {/* Featured badge */}
-                  {review.featured && (
-                    <motion.div
-                      variants={badgeVariants}
-                      animate="float"
-                      className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20"
-                    >
-                      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-green-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-2">
-                        <FaStar className="text-xs" />
-                        FEATURED REVIEW
-                      </div>
-                    </motion.div>
-                  )}
-
+                  
                   {/* Card */}
                   <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 md:p-7 border border-white/20 shadow-2xl hover:shadow-green-900/40 transition-all duration-300 h-full relative overflow-hidden">
                     {/* Background glow effect */}
