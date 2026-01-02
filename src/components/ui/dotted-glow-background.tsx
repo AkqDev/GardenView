@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 interface DottedGlowBackgroundProps {
   className?: string;
   opacity?: number;
@@ -48,19 +46,11 @@ export function DottedGlowBackground({
       
       {/* Animated gradient overlay for subtle movement */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 animate-[shimmer_8s_infinite]"
         style={{
           background: `linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent)`,
-          animation: 'shimmer 8s infinite',
         }}
       />
-      
-      <style jsx>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </div>
   );
 }
