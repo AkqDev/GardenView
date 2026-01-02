@@ -19,7 +19,7 @@ const Portfolio = () => {
     window.open(whatsappUrl, '_blank');
   };
 
-  // Animation variants
+  // Animation variants with proper TypeScript types
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -38,7 +38,7 @@ const Portfolio = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: "easeOut" as const  // Type assertion to fix TypeScript error
       }
     }
   };
@@ -48,7 +48,7 @@ const Portfolio = () => {
     hover: { 
       scale: 1.05,
       transition: { 
-        type: "spring", 
+        type: "spring" as const,  // Type assertion to fix TypeScript error
         stiffness: 400, 
         damping: 10 
       }
@@ -61,7 +61,7 @@ const Portfolio = () => {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const  // Type assertion to fix TypeScript error
     }
   };
 
@@ -151,7 +151,7 @@ const Portfolio = () => {
           
           {/* Floating WhatsApp icon */}
           <motion.span 
-            animate={floatingAnimation}
+            animate={floatingAnimation as any}  // Type assertion for floating animation
             className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-white text-[#008151] p-1.5 sm:p-2 rounded-full shadow-lg z-20"
           >
             <FaWhatsapp size={16} className="sm:w-5 sm:h-5" />
