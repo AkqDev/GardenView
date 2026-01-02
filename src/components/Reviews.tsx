@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import { FaStar, FaQuoteLeft, FaArrowRight } from 'react-icons/fa';
 import review1 from '../assets/review1.jpg';
 import review2 from '../assets/review2.jpg';
 import review3 from '../assets/review3.jpg';
 import review4 from '../assets/review4.jpg';
 
 const Reviews = () => {
-  // Left carousel reviews
-  const leftReviews = [
+  // All reviews combined
+  const allReviews = [
     {
       id: 1,
       name: "Sophie Moore",
@@ -15,7 +15,7 @@ const Reviews = () => {
       image: review1,
       rating: 5,
       text: "Transformed our yard into a beautiful outdoor oasis, absolutely stunning",
-      delay: 0
+      featured: true
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ const Reviews = () => {
       image: review2,
       rating: 5,
       text: "Fantastic landscaping service with remarkable results. Highly recommended!",
-      delay: 0.1
+      featured: true
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Reviews = () => {
       image: review3,
       rating: 5,
       text: "Exceptional service and breathtaking results. Our garden looks amazing!",
-      delay: 0.2
+      featured: true
     },
     {
       id: 4,
@@ -42,12 +42,8 @@ const Reviews = () => {
       image: review4,
       rating: 5,
       text: "Highly professional team delivering top-notch landscaping every single time.",
-      delay: 0.3
-    }
-  ];
-
-  // Right carousel reviews
-  const rightReviews = [
+      featured: true
+    },
     {
       id: 5,
       name: "Patrick Meyer",
@@ -55,7 +51,7 @@ const Reviews = () => {
       image: review1,
       rating: 5,
       text: "Expert landscapers who deliver incredible results. Our yard is gorgeous!",
-      delay: 0.4
+      featured: false
     },
     {
       id: 6,
@@ -64,7 +60,7 @@ const Reviews = () => {
       image: review2,
       rating: 5,
       text: "Unmatched expertise and dedication to landscaping perfection every time.",
-      delay: 0.5
+      featured: false
     },
     {
       id: 7,
@@ -73,7 +69,7 @@ const Reviews = () => {
       image: review3,
       rating: 5,
       text: "Exceeded all our expectations with their landscaping skills and creativity.",
-      delay: 0.6
+      featured: false
     },
     {
       id: 8,
@@ -82,39 +78,30 @@ const Reviews = () => {
       image: review4,
       rating: 5,
       text: "Impressive transformation of our outdoor space, couldn't be happier!",
-      delay: 0.7
+      featured: false
     }
   ];
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
+  // Create extended array for seamless scrolling
+  const extendedReviews = [...allReviews, ...allReviews, ...allReviews];
+
+  // Horizontal scroll animation
+  const scrollAnimation = {
+    x: [0, -2800], // Adjusted for all cards
+    transition: {
+      duration: 40,
+      repeat: Infinity,
+      ease: "linear"
     }
   };
 
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
+  // Card hover animation
   const cardVariants = {
-    initial: { scale: 1 },
+    initial: { scale: 1, y: 0 },
     hover: {
       scale: 1.05,
-      y: -10,
+      y: -8,
+      boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
       transition: {
         type: "spring",
         stiffness: 300,
@@ -123,43 +110,58 @@ const Reviews = () => {
     }
   };
 
-  // Floating animation for continuous movement
-  const floatingAnimation = {
-    y: [0, -20, 0],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
-  // Infinite scroll animation
-  const infiniteScrollAnimation = {
-    y: [0, -1000],
-    transition: {
-      duration: 40,
-      repeat: Infinity,
-      ease: "linear"
+  // Floating animation for featured badge
+  const badgeVariants = {
+    float: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
     }
   };
 
   return (
-    <div className="w-full py-20 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
-      {/* Background decorative elements */}
-      <motion.div 
-        className="absolute top-10 left-10 w-32 h-32 rounded-full bg-green-900/10 blur-3xl"
-        animate={floatingAnimation}
-      />
-      <motion.div 
-        className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-green-800/10 blur-3xl"
-        animate={{
-          ...floatingAnimation,
-          transition: { ...floatingAnimation.transition, delay: 1 }
-        }}
-      />
+    <div className="w-full py-24 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          className="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-green-900/5 blur-3xl"
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.1, 1],
+            transition: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-10 w-72 h-72 rounded-full bg-green-800/5 blur-3xl"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+            scale: [1, 1.1, 1],
+            transition: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }
+          }}
+        />
+        
+        {/* Decorative grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="h-full w-full bg-[linear-gradient(90deg,#22c55e_1px,transparent_1px),linear-gradient(#22c55e_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        </div>
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header Section */}
+        {/* Header Section - More engaging */}
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: -30 }}
@@ -167,187 +169,179 @@ const Reviews = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, type: "spring" }}
-            className="inline-block mb-4"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ 
+              duration: 0.8, 
+              type: "spring",
+              stiffness: 200,
+              damping: 15 
+            }}
+            className="inline-block mb-6"
           >
-            <div className="bg-green-800/20 p-3 rounded-full">
-              <FaQuoteLeft className="text-green-400 text-2xl" />
+            <div className="relative">
+              <div className="absolute inset-0 bg-green-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
+              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-4 rounded-full shadow-2xl">
+                <FaQuoteLeft className="text-white text-3xl" />
+              </div>
+              <motion.div
+                variants={badgeVariants}
+                animate="float"
+                className="absolute -top-2 -right-2 bg-yellow-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+              >
+                TRUSTED
+              </motion.div>
             </div>
           </motion.div>
           
-          <h1 className="text-white text-4xl md:text-5xl font-bold font-[poppins] mb-4">
-            Client <span className="text-green-400">Testimonials</span>
-          </h1>
-          <p className="text-gray-300 text-xl font-[poppins] max-w-2xl mx-auto">
-            Hear what our delighted clients have to say about their transformed spaces
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold font-[poppins] mb-4 leading-tight">
+              Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Homeowners</span> & <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-green-400">Professionals</span>
+            </h1>
+          </motion.div>
+       </motion.div>
 
-        {/* Carousels Container */}
-        <div className="relative flex flex-col lg:flex-row gap-8 items-center justify-center">
-          
-          {/* Left Carousel */}
-          <div className="lg:w-1/2 relative overflow-hidden h-[600px] rounded-3xl">
+        {/* Main Carousel Section */}
+        <div className="relative">
+          {/* Section Title with gradient */}
+          <motion.div 
+            className="text-center mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-900/30 to-emerald-900/30 px-6 py-3 rounded-full border border-green-500/20 backdrop-blur-sm">
+              <FaStar className="text-yellow-400 text-lg animate-spin-slow" />
+              <h2 className="text-white text-2xl md:text-3xl font-bold font-[poppins]">
+                Client Testimonials
+              </h2>
+              <FaStar className="text-yellow-400 text-lg animate-spin-slow" style={{ animationDirection: 'reverse' }} />
+            </div>
+            <p className="text-gray-300 mt-4 text-lg">
+              See what our clients are saying about their experience
+            </p>
+          </motion.div>
+
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Gradient overlays for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#11322A] via-[#11322A]/95 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#11322A] via-[#11322A]/95 to-transparent z-10 pointer-events-none"></div>
+            
+            {/* Glow effect behind carousel */}
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-emerald-500/10 blur-3xl -z-10"></div>
+
+            {/* Main Carousel */}
             <motion.div
-              className="absolute w-full"
-              animate={infiniteScrollAnimation}
+              className="flex py-8 cursor-grab active:cursor-grabbing"
+              animate={scrollAnimation}
+              whileHover={{ animationPlayState: "paused" }}
             >
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                className="space-y-6"
-              >
-                {[...leftReviews, ...leftReviews].map((review, index) => (
-                  <motion.div
-                    key={`${review.id}-${index}`}
-                    variants={itemVariants}
-                    custom={review.delay}
-                    whileHover="hover"
-                    initial="initial"
-                    variants={cardVariants}
-                    className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl hover:shadow-green-900/30 transition-all duration-300"
-                  >
+              {extendedReviews.map((review, index) => (
+                <motion.div
+                  key={`review-${review.id}-${index}`}
+                  whileHover="hover"
+                  initial="initial"
+                  variants={cardVariants}
+                  className="flex-shrink-0 w-[300px] md:w-[340px] mx-3 md:mx-4 relative group"
+                >
+                  {/* Featured badge */}
+                  {review.featured && (
+                    <motion.div
+                      variants={badgeVariants}
+                      animate="float"
+                      className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20"
+                    >
+                      <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-green-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-2">
+                        <FaStar className="text-xs" />
+                        FEATURED REVIEW
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Card */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 md:p-7 border border-white/20 shadow-2xl hover:shadow-green-900/40 transition-all duration-300 h-full relative overflow-hidden">
+                    {/* Background glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 group-hover:opacity-30 transition-opacity duration-300"></div>
+                    
+                    {/* Quote icon background */}
+                    <div className="absolute top-4 right-4 text-green-400/10 text-6xl md:text-7xl">
+                      <FaQuoteLeft />
+                    </div>
+
                     {/* Rating Stars */}
-                    <div className="flex items-center mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar key={i} className="text-yellow-400 mr-1" />
-                      ))}
-                      <span className="ml-2 text-green-300 font-semibold">5.0</span>
+                    <div className="flex items-center mb-4 md:mb-5 relative z-10">
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            whileHover={{ scale: 1.2, rotate: 15 }}
+                            transition={{ type: "spring", stiffness: 400 }}
+                          >
+                            <FaStar className="text-yellow-400 w-5 h-5 md:w-6 md:h-6 mr-1 drop-shadow-lg" />
+                          </motion.div>
+                        ))}
+                      </div>
+                      <span className="ml-3 text-green-300 font-bold text-base md:text-lg bg-green-900/30 px-3 py-1 rounded-full">
+                        5.0 Rating
+                      </span>
                     </div>
 
                     {/* Review Text */}
-                    <p className="text-gray-100 text-lg italic mb-6 leading-relaxed">
+                    <p className="text-gray-100 text-base md:text-lg italic mb-6 md:mb-7 leading-relaxed relative z-10 min-h-[120px]">
                       "{review.text}"
                     </p>
 
                     {/* Client Info */}
-                    <div className="flex items-center">
+                    <div className="flex items-center relative z-10">
                       <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6, type: "spring" }}
                         className="relative"
                       >
-                        <div className="absolute inset-0 bg-green-400 rounded-full blur-sm opacity-50"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <img 
                           src={review.image} 
                           alt={review.name} 
-                          className="w-14 h-14 rounded-full object-cover border-2 border-green-400 relative"
+                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-green-400 relative shadow-lg"
                         />
                       </motion.div>
                       <div className="ml-4">
-                        <h3 className="text-white text-xl font-bold font-[poppins]">
+                        <h3 className="text-white text-lg md:text-xl font-bold font-[poppins]">
                           {review.name}
                         </h3>
-                        <p className="text-green-300 text-sm font-medium">
-                          {review.role}
-                        </p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-green-300 text-sm md:text-base font-medium bg-green-900/30 px-3 py-1 rounded-full">
+                            {review.role}
+                          </p>
+                          <motion.div
+                            whileHover={{ x: 5 }}
+                            className="text-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          >
+                            <FaArrowRight />
+                          </motion.div>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Decorative Element */}
-                    <motion.div 
-                      className="absolute -bottom-2 -right-2 text-green-400/20 text-6xl"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      <FaQuoteLeft />
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </motion.div>
+                    {/* Decorative corner elements */}
+                    <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-green-400/30 rounded-tl-3xl"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-green-400/30 rounded-br-3xl"></div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Right Carousel */}
-          <div className="lg:w-1/2 relative overflow-hidden h-[600px] rounded-3xl">
-            <motion.div
-              className="absolute w-full"
-              animate={{
-                y: [0, -1000],
-                transition: {
-                  duration: 40,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: 20 // Offset for continuous feel
-                }
-              }}
-            >
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                className="space-y-6"
-              >
-                {[...rightReviews, ...rightReviews].map((review, index) => (
-                  <motion.div
-                    key={`${review.id}-${index}`}
-                    variants={itemVariants}
-                    custom={review.delay}
-                    whileHover="hover"
-                    initial="initial"
-                    variants={cardVariants}
-                    className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl hover:shadow-green-900/30 transition-all duration-300"
-                  >
-                    {/* Rating Stars */}
-                    <div className="flex items-center mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar key={i} className="text-yellow-400 mr-1" />
-                      ))}
-                      <span className="ml-2 text-green-300 font-semibold">5.0</span>
-                    </div>
+       </div>
+      </div>
 
-                    {/* Review Text */}
-                    <p className="text-gray-100 text-lg italic mb-6 leading-relaxed">
-                      "{review.text}"
-                    </p>
-
-                    {/* Client Info */}
-                    <div className="flex items-center">
-                      <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className="relative"
-                      >
-                        <div className="absolute inset-0 bg-green-400 rounded-full blur-sm opacity-50"></div>
-                        <img 
-                          src={review.image} 
-                          alt={review.name} 
-                          className="w-14 h-14 rounded-full object-cover border-2 border-green-400 relative"
-                        />
-                      </motion.div>
-                      <div className="ml-4">
-                        <h3 className="text-white text-xl font-bold font-[poppins]">
-                          {review.name}
-                        </h3>
-                        <p className="text-green-300 text-sm font-medium">
-                          {review.role}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Decorative Element */}
-                    <motion.div 
-                      className="absolute -bottom-2 -right-2 text-green-400/20 text-6xl"
-                      animate={{ rotate: -360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      <FaQuoteLeft />
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-</div>
-
-      {/* Gradient overlay for fade effect */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#11322A] via-transparent to-[#11322A] pointer-events-none"></div>
+      {/* Bottom gradient overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#11322A] to-transparent pointer-events-none"></div>
     </div>
   );
 };
