@@ -4,6 +4,7 @@ import review1 from '../assets/review1.jpg';
 import review2 from '../assets/review2.jpg';
 import review3 from '../assets/review3.jpg';
 import review4 from '../assets/review4.jpg';
+import { DottedGlowBackground } from '../components/ui/dotted-glow-background';
 
 const Reviews = () => {
   // All reviews combined
@@ -91,7 +92,7 @@ const Reviews = () => {
     transition: {
       duration: 40,
       repeat: Infinity,
-      ease: "linear"
+      ease: "linear" as const,
     }
   };
 
@@ -103,7 +104,7 @@ const Reviews = () => {
       y: -8,
       boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 15
       }
@@ -117,13 +118,24 @@ const Reviews = () => {
       transition: {
         duration: 2,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut" as const,
       }
     }
   };
 
   return (
     <div className="w-full py-24 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
+      {/* Dotted Glow Background - Simple CSS version */}
+      <DottedGlowBackground
+        className="absolute inset-0"
+        opacity={0.25}
+        size={1.2}
+        gap={25}
+        dotColor="#059669"
+        glowColor="#10b981"
+        glow={true}
+      />
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
@@ -135,7 +147,7 @@ const Reviews = () => {
             transition: {
               duration: 6,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut" as const,
             }
           }}
         />
@@ -148,16 +160,11 @@ const Reviews = () => {
             transition: {
               duration: 7,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "easeInOut" as const,
               delay: 1
             }
           }}
         />
-        
-        {/* Decorative grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[linear-gradient(90deg,#22c55e_1px,transparent_1px),linear-gradient(#22c55e_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        </div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -173,7 +180,7 @@ const Reviews = () => {
             animate={{ scale: 1, rotate: 0 }}
             transition={{ 
               duration: 0.8, 
-              type: "spring",
+              type: "spring" as const,
               stiffness: 200,
               damping: 15 
             }}
@@ -280,7 +287,7 @@ const Reviews = () => {
                           <motion.div
                             key={i}
                             whileHover={{ scale: 1.2, rotate: 15 }}
-                            transition={{ type: "spring", stiffness: 400 }}
+                            transition={{ type: "spring" as const, stiffness: 400 }}
                           >
                             <FaStar className="text-yellow-400 w-5 h-5 md:w-6 md:h-6 mr-1 drop-shadow-lg" />
                           </motion.div>
@@ -300,7 +307,7 @@ const Reviews = () => {
                     <div className="flex items-center relative z-10">
                       <motion.div
                         whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6, type: "spring" }}
+                        transition={{ duration: 0.6, type: "spring" as const }}
                         className="relative"
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -336,8 +343,7 @@ const Reviews = () => {
               ))}
             </motion.div>
           </div>
-
-       </div>
+        </div>
       </div>
 
       {/* Bottom gradient overlay */}
