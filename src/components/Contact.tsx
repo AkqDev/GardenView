@@ -80,7 +80,7 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   }
@@ -92,7 +92,7 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: "easeOut" as const,
         delay: 0.5
       }
     }
@@ -105,7 +105,7 @@ const Contact = () => {
       opacity: 1,
       transition: {
         duration: 1,
-        ease: "easeOut"
+        ease: "easeOut" as const
       }
     }
   }
@@ -115,7 +115,7 @@ const Contact = () => {
       scale: 1.05,
       boxShadow: "0 10px 25px rgba(41, 103, 65, 0.3)",
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300
       }
     },
@@ -129,7 +129,7 @@ const Contact = () => {
       y: -5,
       scale: 1.1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400
       }
     }
@@ -204,7 +204,7 @@ const Contact = () => {
                 transition={{
                   duration: 0.5,
                   delay: 0.8 + (index * 0.2),
-                  ease: "easeOut"
+                  ease: "easeOut" as const
                 }}
                 whileHover={{ x: 5 }}
                 className={`mb-4 sm:mb-6 md:mb-8 pb-4 sm:pb-6 md:pb-8 ${
@@ -246,7 +246,7 @@ const Contact = () => {
                       <motion.span
                         animate={{ rotate: 0 }}
                         whileHover={{ rotate: 10 }}
-                        transition={{ type: "spring" }}
+                        transition={{ type: "spring" as const }}
                       >
                         <BsWhatsapp className="text-lg sm:text-xl" />
                       </motion.span>
@@ -263,7 +263,7 @@ const Contact = () => {
                       <motion.span
                         animate={{ y: 0 }}
                         whileHover={{ y: -2 }}
-                        transition={{ type: "spring" }}
+                        transition={{ type: "spring" as const }}
                       >
                         <BsEnvelope className="text-lg sm:text-xl" />
                       </motion.span>
