@@ -65,14 +65,14 @@ const Portfolio = () => {
     }
   };
 
-  // Portfolio images array (you can keep your original imports)
+  // Portfolio images array with improved grid layout
   const portfolioImages = [
-    { id: 1, src: portfolio1, className: 'div1 row-span-3' },
-    { id: 2, src: portfolio2, className: 'div2 row-span-3' },
-    { id: 3, src: portfolio3, className: 'div3 col-span-2 row-span-5' },
-    { id: 4, src: portfolio4, className: 'div9 col-span-2 row-span-5 row-start-4' },
-    { id: 5, src: portfolio5, className: 'div10 col-start-3 row-start-6 row-span-3' },
-    { id: 6, src: portfolio6, className: 'div11 col-start-4 row-start-6 row-span-3' },
+    { id: 1, src: portfolio1, className: 'h-64 sm:h-auto' },
+    { id: 2, src: portfolio2, className: 'h-64 sm:h-auto' },
+    { id: 3, src: portfolio3, className: 'h-64 sm:h-[380px] col-span-2' },
+    { id: 4, src: portfolio4, className: 'h-64 sm:h-[380px] col-span-2' },
+    { id: 5, src: portfolio5, className: 'h-64 sm:h-auto' },
+    { id: 6, src: portfolio6, className: 'h-64 sm:h-auto' },
   ];
 
   return (
@@ -101,18 +101,19 @@ const Portfolio = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
-        className="flex justify-center items-center px-5"
+        className="flex justify-center items-center px-4 sm:px-5"
       >
-        <div className="parent grid grid-cols-4 gap-4 max-w-[1300px] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-[1300px] mx-auto">
           {portfolioImages.map((img) => (
             <motion.div 
               key={img.id}
               variants={itemVariants}
-              className={`${img.className} overflow-hidden group rounded-3xl`}
+              className={`${img.className} overflow-hidden group rounded-2xl sm:rounded-3xl`}
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-             <img src={img.src} 
+              <img 
+                src={img.src} 
                 alt={`portfolio${img.id}`} 
                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
               />
@@ -123,7 +124,7 @@ const Portfolio = () => {
 
       {/* Get in Touch Button */}
       <motion.div 
-        className="flex justify-center mt-12"
+        className="flex justify-center mt-8 sm:mt-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -138,7 +139,7 @@ const Portfolio = () => {
           onHoverStart={() => setIsHovered(true)}
           onHoverEnd={() => setIsHovered(false)}
           onClick={openWhatsApp}
-          className="group relative bg-gradient-to-r from-[#008151] to-[#00a86b] text-white px-10 py-4 rounded-full text-lg font-semibold font-[poppins] shadow-lg overflow-hidden border-2 border-transparent hover:border-white/30 transition-all duration-300"
+          className="group relative bg-gradient-to-r from-[#008151] to-[#00a86b] text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold font-[poppins] shadow-lg overflow-hidden border-2 border-transparent hover:border-white/30 transition-all duration-300"
         >
           {/* Background shine effect */}
           <motion.span 
@@ -151,19 +152,19 @@ const Portfolio = () => {
           {/* Floating WhatsApp icon */}
           <motion.span 
             animate={floatingAnimation}
-            className="absolute -top-3 -right-3 bg-white text-[#008151] p-2 rounded-full shadow-lg z-20"
+            className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 bg-white text-[#008151] p-1.5 sm:p-2 rounded-full shadow-lg z-20"
           >
-            <FaWhatsapp size={20} />
+            <FaWhatsapp size={16} className="sm:w-5 sm:h-5" />
           </motion.span>
 
           {/* Button text with icon */}
-          <span className="flex items-center gap-3 relative z-10">
+          <span className="flex items-center gap-2 sm:gap-3 relative z-10">
             Get in Touch
             <motion.span
               animate={{ x: isHovered ? 5 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <FaArrowRight />
+              <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.span>
           </span>
 
