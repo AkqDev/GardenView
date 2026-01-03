@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import type { Variants } from 'framer-motion';
 
 const Footer = () => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -17,15 +17,6 @@ const Footer = () => {
       controls.start('visible');
     }
   }, [controls, inView]);
-
-  // Show scroll to top button when scrolling down
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 200);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const quickLinks = [
     { name: 'Home', to: 'home', offset: -100 },
@@ -43,8 +34,8 @@ const Footer = () => {
     { icon: <FaTwitter />, name: 'Twitter', href: '#', color: 'hover:text-blue-400' }
   ];
 
-  // Animation variants
-  const containerVariants = {
+  // Animation variants with proper typing
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -55,50 +46,41 @@ const Footer = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
         damping: 12
       }
     }
   };
 
-  const leafVariants = {
+  const leafVariants: Variants = {
     initial: { rotate: 0 },
     hover: { 
       rotate: [0, 10, -10, 10, 0],
       transition: { 
         duration: 2,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut" as const
       }
     }
   };
 
-  const socialIconVariants = {
+  const socialIconVariants: Variants = {
     initial: { scale: 1 },
     hover: { 
       scale: 1.2,
       rotate: 360,
       transition: { 
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 10
       }
-    }
-  };
-
-  const floatingAnimation = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
     }
   };
 
@@ -122,11 +104,14 @@ const Footer = () => {
             left: `${20 + i * 30}%`,
             top: `${10 + i * 15}%`
           }}
-          animate={floatingAnimation}
-          transition={{
-            duration: 4 + i,
-            repeat: Infinity,
-            delay: i * 0.5
+          animate={{
+            y: [0, -10, 0],
+            transition: {
+              duration: 4 + i,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut" as const
+            }
           }}
         >
           <FaLeaf className="w-8 h-8" />
@@ -180,7 +165,7 @@ const Footer = () => {
             >
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" as const }}
               >
                 <FaHeart className="w-4 h-4 mr-2 text-[#008151]" />
               </motion.div>
@@ -203,7 +188,7 @@ const Footer = () => {
                   variants={itemVariants}
                   custom={index}
                   whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: "spring" as const, stiffness: 300 }}
                 >
                   <Link
                     to={link.to}
@@ -217,7 +202,7 @@ const Footer = () => {
                       className="w-2 h-2 bg-[#008151] rounded-full mr-2"
                       initial={{ scale: 0 }}
                       whileHover={{ scale: 1 }}
-                      transition={{ type: "spring" }}
+                      transition={{ type: "spring" as const }}
                     />
                     <span className="hover:text-[#00d084] transition-colors duration-300 font-semibold font-[poppins]">
                       {link.name}
@@ -294,7 +279,7 @@ const Footer = () => {
         <motion.div 
           className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#008151]/50 to-transparent"
           animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" as const }}
         />
       </motion.div>
 

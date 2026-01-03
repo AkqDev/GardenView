@@ -79,8 +79,8 @@ const Navbar = () => {
     }
   };
 
-  // Function to handle nav item click
-  const handleNavClick = (to: string) => {
+  // Function to handle nav item click - FIXED: removed unused 'to' parameter
+  const handleNavClick = () => {
     setIsMenuOpen(false);
   };
 
@@ -153,7 +153,7 @@ const Navbar = () => {
                     duration={1000}
                     className="block text-sm font-semibold flex items-center px-4 py-2 text-[#008151] transition-all duration-300 cursor-pointer"
                     activeClass="text-[#006b43] font-bold"
-                    onClick={() => handleNavClick(item.to)}
+                    onClick={() => handleNavClick()}
                   >
                     {item.name}
                     <motion.span
@@ -233,7 +233,7 @@ const Navbar = () => {
                   key={item.name}
                   variants={mobileItemVariants}
                   className="flex items-center px-5 py-4 rounded-xl text-base font-medium text-emerald-800 hover:text-white hover:bg-gradient-to-r from-[#008151] to-emerald-600 transition-all duration-300 group cursor-pointer"
-                  onClick={() => handleNavClick(item.to)}
+                  onClick={() => handleNavClick()}
                   whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -245,7 +245,7 @@ const Navbar = () => {
                     duration={1000}
                     className="flex items-center w-full"
                     activeClass="text-white bg-gradient-to-r from-[#008151] to-emerald-600"
-                    onClick={() => handleNavClick(item.to)}
+                    onClick={() => handleNavClick()}
                   >
                     <span className="w-2 h-2 bg-emerald-500 rounded-full mr-4 group-hover:bg-white transition-all duration-300"></span>
                     <span>{item.name}</span>
