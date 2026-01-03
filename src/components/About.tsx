@@ -51,7 +51,7 @@ const About = () => {
   };
 
   return (
-    <div className="my-20 md:my-32 w-full font-[poppins] overflow-hidden">
+    <div id="about" className="my-20 md:my-32 w-full font-[poppins] overflow-hidden">
       <div className="flex flex-col md:flex-row justify-between items-center max-w-[1400px] mx-auto px-6 lg:px-16 gap-10 md:gap-16">
         
         {/* LEFT IMAGE - Shows on left for desktop, bottom for mobile */}

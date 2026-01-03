@@ -141,6 +141,7 @@ const Contact = () => {
       animate="visible"
       variants={containerVariants}
       className="w-full h-auto mx-auto my-10 md:my-20 relative overflow-hidden"
+      id="contact"
     >
       {/* Header Section */}
       <div className="text-center mb-6 md:mb-10 px-4">
@@ -186,14 +187,7 @@ const Contact = () => {
           {/* Sidebar */}
           <motion.div
             variants={sidebarVariants}
-            className="absolute top-1/2 -translate-y-1/2 
-                       w-[calc(100%-32px)] max-w-[320px] sm:max-w-[360px] md:max-w-[380px]
-                       left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 
-                       md:right-8 lg:right-12 
-                       bg-white/95 backdrop-blur-md 
-                       rounded-xl sm:rounded-2xl 
-                       p-4 sm:p-6 md:p-8 
-                       shadow-2xl"
+            className="absolute top-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-w-[310px] sm:max-w-[360px] md:max-w-[380px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 lg:right-12 bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl"
             whileHover={{ boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)" }}
           >
             {steps.map((item, index) => (

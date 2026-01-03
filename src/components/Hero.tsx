@@ -54,7 +54,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full min-h-screen relative rounded-3xl overflow-hidden font-[Poppins]">
+    <div id="home" className="w-full min-h-screen relative rounded-3xl overflow-hidden font-[Poppins]">
       {/* Animated Background with Overlay */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-fixed"

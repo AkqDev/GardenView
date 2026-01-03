@@ -76,7 +76,7 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="w-full h-auto mx-auto my-20 relative overflow-hidden">
+    <div id="portfolio" className="w-full h-auto mx-auto my-20 relative overflow-hidden">
         <div className="text-center mb-10">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}

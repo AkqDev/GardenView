@@ -112,7 +112,7 @@ const Reviews = () => {
   };
 
   return (
-    <div className="w-full py-20 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden">
+    <div id="testimonials" className="w-full py-20 mx-auto bg-gradient-to-b from-[#11322A] to-[#0A231C] relative overflow-hidden rounded-3xl">
       {/* Dotted Glow Background - Simple CSS version */}
       <DottedGlowBackground
         className="absolute inset-0"

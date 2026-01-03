@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { FaLeaf, FaBars, FaTimes, FaWhatsapp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-scroll';
 import type { Variants } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home' },
-    { name: 'About' },
-    { name: 'Services' },
-    { name: 'Contact' },
+    { name: 'Home', to: 'home', offset: -100 },
+    { name: 'About', to: 'about', offset: -80 },
+    { name: 'Services', to: 'services', offset: -80 },
+    { name: 'Portfolio', to: 'portfolio', offset: -80 },
+    { name: 'Testimonials', to: 'testimonials', offset: -80 },
+    { name: 'Contact', to: 'contact', offset: -80 },
   ];
 
   // WhatsApp configuration - REPLACE with your actual number
@@ -76,6 +79,11 @@ const Navbar = () => {
     }
   };
 
+  // Function to handle nav item click
+  const handleNavClick = (to: string) => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
@@ -100,7 +108,14 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="flex items-center">
+              <Link
+                to="home"
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={1000}
+                className="flex items-center"
+              >
                 <motion.div
                   animate={{ rotate: [0, 10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
@@ -108,36 +123,46 @@ const Navbar = () => {
                   <FaLeaf className="w-10 h-10 text-[#008151] mr-3" />
                 </motion.div>
                 <h1 className="text-3xl text-black/800 group-hover:text-[#008151] transition-colors duration-300">
-                    Garden View
+                  Garden View
                 </h1>
-              </div>
+              </Link>
             </motion.div>
 
-            {/* Desktop Navigation Items */}
+            {/* Desktop Navigation Items with React Scroll */}
             <motion.div 
               variants={containerVariants}
               className="hidden md:flex items-center space-x-2"
             >
               {navItems.map((item) => (
-                <motion.a
+                <motion.div
                   key={item.name}
                   variants={itemVariants}
-                  href="#"
                   whileHover={{ 
                     scale: 1.05,
                     y: -2,
                     backgroundColor: "rgba(0, 129, 81, 0.1)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative text-md font-semibold flex items-center px-4 py-2 rounded-full text-lg text-[#008151] transition-all duration-300"
+                  className="relative"
                 >
-                  {item.name}
-                  <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#008151] rounded-full"
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.a>
+                  <Link
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={item.offset}
+                    duration={1000}
+                    className="block text-sm font-semibold flex items-center px-4 py-2 text-[#008151] transition-all duration-300 cursor-pointer"
+                    activeClass="text-[#006b43] font-bold"
+                    onClick={() => handleNavClick(item.to)}
+                  >
+                    {item.name}
+                    <motion.span
+                      className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#008151] rounded-full"
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </Link>
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -204,18 +229,28 @@ const Navbar = () => {
               variants={containerVariants}
             >
               {navItems.map((item) => (
-                <motion.a
+                <motion.div
                   key={item.name}
                   variants={mobileItemVariants}
-                  href="#"
-                  className="flex items-center px-5 py-4 rounded-xl text-base font-medium text-emerald-800 hover:text-white hover:bg-gradient-to-r from-[#008151] to-emerald-600 transition-all duration-300 group"
-                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center px-5 py-4 rounded-xl text-base font-medium text-emerald-800 hover:text-white hover:bg-gradient-to-r from-[#008151] to-emerald-600 transition-all duration-300 group cursor-pointer"
+                  onClick={() => handleNavClick(item.to)}
                   whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full mr-4 group-hover:bg-white transition-all duration-300"></span>
-                  <span>{item.name}</span>
-                </motion.a>
+                  <Link
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={item.offset}
+                    duration={1000}
+                    className="flex items-center w-full"
+                    activeClass="text-white bg-gradient-to-r from-[#008151] to-emerald-600"
+                    onClick={() => handleNavClick(item.to)}
+                  >
+                    <span className="w-2 h-2 bg-emerald-500 rounded-full mr-4 group-hover:bg-white transition-all duration-300"></span>
+                    <span>{item.name}</span>
+                  </Link>
+                </motion.div>
               ))}
               <motion.div 
                 variants={mobileItemVariants}
@@ -265,7 +300,6 @@ const Navbar = () => {
           <FaWhatsapp className="text-2xl" />
         </motion.a>
       </motion.div>
-
     </motion.nav>
   );
 };
